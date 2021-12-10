@@ -5,12 +5,13 @@
  */
 package lab9p2_franciscovilleda_12111170;
 
+import java.util.ArrayList;
 /**
  *
  * @author JOSE VILLEDA
  */
 public class Login extends javax.swing.JFrame {
-
+    public static ArrayList<Usuarios> usuarios = new ArrayList();
     /**
      * Creates new form Login
      */
@@ -51,6 +52,11 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setText("¿No tienes cuenta? Registrate aqui");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Ingresar");
@@ -99,6 +105,14 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        Registro registro = new Registro();
+        registro.setVisible(true);
+        adminUsuarios ad = new adminUsuarios();
+        usuarios = ad.getUsers();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
