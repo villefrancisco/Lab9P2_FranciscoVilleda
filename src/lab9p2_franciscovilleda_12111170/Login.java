@@ -6,6 +6,7 @@
 package lab9p2_franciscovilleda_12111170;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author JOSE VILLEDA
@@ -17,6 +18,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        adminUsuarios ad = new adminUsuarios();
+        usuarios = ad.getUsers();
     }
 
     /**
@@ -30,9 +33,9 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        text_login = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        text_password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -44,12 +47,12 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        text_login.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Usuario");
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        text_password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setText("¿No tienes cuenta? Registrate aqui");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -60,6 +63,11 @@ public class Login extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Ingresar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,10 +81,10 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(text_login)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jPasswordField1)
+                            .addComponent(text_password)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -91,11 +99,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(text_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(text_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,9 +118,44 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Registro registro = new Registro();
         registro.setVisible(true);
-        adminUsuarios ad = new adminUsuarios();
-        usuarios = ad.getUsers();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        try{
+            boolean valido = false;
+            Usuarios found = new Usuarios();
+            for (Usuarios temp: usuarios) {
+                if(text_login.getText().equals(temp.getUsuario())&& text_password.getText().equals(temp.getPassword())){
+                    valido = true;
+                    found = temp;
+                }
+            }
+            if(valido){
+                String tipo = found.getTipo();
+                System.out.println(tipo);
+                if(tipo.equals("admin")){
+                    Administrador admin = new Administrador();
+                    admin.setVisible(true);
+                }else if(tipo.equals("cliente")){
+                    Cliente cliente = new Cliente();
+                    cliente.setVisible(true);
+                }else if(tipo.equals("personal")){
+                    Personal personal = new Personal();
+                    personal.setVisible(true);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Usuario no encontrado.");
+            }
+            
+        }catch(Exception x){
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña invalido.");
+        }
+        finally{
+            text_login.setText("");
+            text_password.setText("");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -155,7 +198,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField text_login;
+    private javax.swing.JPasswordField text_password;
     // End of variables declaration//GEN-END:variables
 }

@@ -162,7 +162,7 @@ public class Registro extends javax.swing.JFrame {
                             + "'" + reg_nombre.getText() + "', "
                             + "'" + reg_password.getText() +"', "
                             + "'" + reg_edad.getText() + "', "
-                            + "' cliente ')");
+                            + "'cliente')");
                     ResultSet rs = db.query.getResultSet();           
                     db.commit();
                 } catch (SQLException ex) {
