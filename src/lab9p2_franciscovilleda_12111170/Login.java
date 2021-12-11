@@ -12,14 +12,12 @@ import javax.swing.JOptionPane;
  * @author JOSE VILLEDA
  */
 public class Login extends javax.swing.JFrame {
-    public static ArrayList<Usuarios> usuarios = new ArrayList();
+    public static ArrayList<Usuarios> enlinea = new ArrayList();
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        adminUsuarios ad = new adminUsuarios();
-        usuarios = ad.getUsers();
     }
 
     /**
@@ -123,6 +121,9 @@ public class Login extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         try{
+            adminUsuarios au = new adminUsuarios();
+            ArrayList<Usuarios> usuarios;
+            usuarios = au.getUsers();
             boolean valido = false;
             Usuarios found = new Usuarios();
             for (Usuarios temp: usuarios) {
@@ -133,12 +134,12 @@ public class Login extends javax.swing.JFrame {
             }
             if(valido){
                 String tipo = found.getTipo();
-                System.out.println(tipo);
                 if(tipo.equals("admin")){
                     Administrador admin = new Administrador();
                     admin.setVisible(true);
                 }else if(tipo.equals("cliente")){
                     Cliente cliente = new Cliente();
+                    enlinea.add(found);
                     cliente.setVisible(true);
                 }else if(tipo.equals("personal")){
                     Personal personal = new Personal();

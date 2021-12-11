@@ -5,6 +5,7 @@
  */
 package lab9p2_franciscovilleda_12111170;
 
+import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -144,10 +145,12 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean valido = true;
         try{
-            if(Login.usuarios.isEmpty()){
+            adminUsuarios au = new adminUsuarios();
+            ArrayList<Usuarios> usuarios = au.getUsers();
+            if(usuarios.isEmpty()){
                 valido = true;
             }else{
-                for (Usuarios temp : Login.usuarios) {
+                for (Usuarios temp : usuarios) {
                     if(temp.getUsuario().equals(reg_usuario.getText())){
                         valido = false;
                     }
@@ -169,8 +172,6 @@ public class Registro extends javax.swing.JFrame {
                     ex.printStackTrace();
                 }
                 db.desconectar();
-                adminUsuarios ad = new adminUsuarios();
-                Login.usuarios = ad.getUsers();
                 JOptionPane.showMessageDialog(this, "Se ha agregado el elemento con exito");
                 this.setVisible(false);
             }
