@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
     public static ArrayList<Usuarios> enlinea = new ArrayList();
+    public static Usuarios conectado = new Usuarios();
     /**
      * Creates new form Login
      */
@@ -140,6 +141,7 @@ public class Login extends javax.swing.JFrame {
                 }else if(tipo.equals("cliente")){
                     Cliente cliente = new Cliente();
                     enlinea.add(found);
+                    conectado = found;
                     cliente.setVisible(true);
                 }else if(tipo.equals("personal")){
                     Personal personal = new Personal();

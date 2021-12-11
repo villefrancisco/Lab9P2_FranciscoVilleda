@@ -10,12 +10,13 @@ package lab9p2_franciscovilleda_12111170;
  * @author JOSE VILLEDA
  */
 public class Cliente extends javax.swing.JFrame {
-
+    public Usuarios user;
     /**
      * Creates new form Cliente
      */
     public Cliente() {
         initComponents();
+        user = Login.conectado;
     }
 
     /**
